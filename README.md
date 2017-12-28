@@ -36,7 +36,7 @@ function getLike(t, k) {<br>
 
 
 ![](http://bmob-cdn-15848.b0.upaiyun.com/2017/12/28/0bbc0965400e0687802916dbdd0d3593.gif)
-
+##免责声明：仅供学习用途，商用请前往官网付费，<br>
 运行demo需要在app.js里配置id详见官网 <br>
 **欢迎star**<br>
 个别开发者还未申请小程序，这里提供一个一些账户
