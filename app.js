@@ -1,8 +1,19 @@
 //app.js
 var Bmob = require('utils/bmob.js')
+<<<<<<< HEAD
 Bmob.initialize("你的Application ID", "你的REST API Key");
+=======
+var BmobSocketIo = require('utils/bmobSocketIo.js').BmobSocketIo;
+Bmob.initialize("39ee83f92ff3a195130596a4eaec5ddf", "a1223fca87f5d229953817f5c2493446");
+
+BmobSocketIo.initialize("39ee83f92ff3a195130596a4eaec5ddf");
+>>>>>>> d72b4d8c34c6528d3dd7484056d6a4ad54ab0402
 App({
   onLaunch: function () {
+
+
+ 
+
     var user = new Bmob.User();//开始注册用户
 
     var newOpenid = wx.getStorageSync('openid')
