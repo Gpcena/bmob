@@ -47,4 +47,3 @@ function getLike(t, k) {<br>
 ----------
 
 > **Tip:** 更多信息请查看[官方文档](http://docs.bmob.cn/data/wechatApp/a_faststart/doc/index.html "官方使用文档")  
->>>>>>> d72b4d8c34c6528d3dd7484056d6a4ad54ab0402
