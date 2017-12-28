@@ -453,7 +453,8 @@ function getLike(t, k) {
         var i;
         var test=[];
         for (i = 0; i < results.length; i++) {
-            if (results[i].attributes.title.indexOf(k) >= 0) {
+            if (results[i].attributes.title.indexOf(k.toUpperCase()) >= 0 ||
+                results[i].attributes.title.indexOf(k.toLowerCase()) >= 0) {
                 console.log("成功");
                 // console.log(results[i]);
                 test[test.length] = results[i]
@@ -465,6 +466,7 @@ function getLike(t, k) {
         }
     });
 }
+
 
 
 function modify(t,e){
