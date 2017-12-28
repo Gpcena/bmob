@@ -49,22 +49,23 @@ Page({
                     });
 
                     console.log(res)
-                    // wx.getStorage({
-                    //     key: Bmob._getBmobPath(Bmob.User._CURRENT_USER_KEY),
-                    //     success: function(res) {
-                    //         var Data =JSON.parse(res.data) ;
-                    //         if(Data.code=="202"){
-                    //             common.showTip("该用户名已经存在！","loading");
-                    //         }
-                    //         else{
-                    //             common.showTip("注册成功请登录","success",function(){
-                    //                 wx.redirectTo({
-                    //                  url: '../login/login'
-                    //                 })
-                    //             });
-                    //         }
-                    //     }
-                    // })
+                    wx.getStorage({
+                        key: Bmob._getBmobPath(Bmob.User._CURRENT_USER_KEY),
+                        success: function(res) {
+                            var Data =JSON.parse(res.data) ;
+                            console.log(Data.code);
+                            if(Data.code=="202"){
+                                common.showTip("该用户名已经存在！","loading");
+                            }
+                            else{
+                                common.showTip("注册成功请登录","success",function(){
+                                    wx.redirectTo({
+                                     url: '../login/login'
+                                    })
+                                });
+                            }
+                        }
+                    })
                 },
                 error: function (userData, error) {
                     that.setData({

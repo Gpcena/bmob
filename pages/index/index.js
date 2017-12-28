@@ -12,10 +12,11 @@ Page({
     windowWidth: 0,
     limit: 10,
     diaryList: [],
+    list:[],
     modifyDiarys: false
   },
-  onLoad: function () {
-    that = this;
+  onLoad: function (e) {
+
 
   },
   noneWindows:function(){
@@ -24,10 +25,8 @@ Page({
           modifyDiarys: ""
         })
   },
-  onShow: function () {
+  onShow: function (e) {
     getList(this);
-
-
     wx.getSystemInfo({
       success: (res) => {
         that.setData({
@@ -163,10 +162,12 @@ Page({
     },
     inputTyping: function (e) {
       //搜索数据
-      getList(this,e.detail.value);
+      //模糊查询免收费
+        getLike(this,e.detail.value);
         this.setData({
             inputVal: e.detail.value
         });
+        
     },
   closeAddLayer: function () {
     that.setData({
@@ -185,13 +186,14 @@ function getList(t,k){
     var Diary = Bmob.Object.extend("diary");
     var query = new Bmob.Query(Diary);
 
-    //会员模糊查询
-    if(k){
-      query.equalTo("title", {"$regex":""+k+".*"});
-      }
+    //会员模糊查询  付费
+    // if(k){
+    //   query.equalTo("title", {"$regex":""+k+".*"});
+    //   }
+   
 
      //普通会员匹配查询
-    // query.equalTo("title", k);
+    query.equalTo("title", k);
 
 
     query.descending('createdAt');
@@ -201,16 +203,52 @@ function getList(t,k){
     query.find({
       success: function (results) {
         // 循环处理查询到的数据
-        console.log(results);
+        // console.log(results[2]);
         that.setData({
           diaryList: results
         })
+        // console.log(diaryList[0]);
+        
       },
       error: function (error) {
         console.log("查询失败: " + error.code + " " + error.message);
       }
     });
+    
+    // query.select("title");
+    // query.find().then(function (results) {
+    //     // 返回成功
+    //     console.log(results);
+
+    // });
 }
+
+/*
+* 模糊查询数据0.0
+*/
+function getLike(t, k) {
+    that = t;
+    var Diary = Bmob.Object.extend("diary");
+    var query = new Bmob.Query(Diary);
+    query.select("title");
+    query.find().then(function (results) {
+        // 返回成功
+        var i;
+        var test=[];
+        for (i = 0; i < results.length; i++) {
+            if (results[i].attributes.title.indexOf(k) >= 0) {
+                console.log("成功");
+                // console.log(results[i]);
+                test[test.length] = results[i]
+                that.setData({
+                    diaryList:null,
+                    diaryList:test,
+                })
+            };
+        }
+    });
+}
+
 
 function modify(t,e){
   var that=t;
